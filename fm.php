@@ -191,7 +191,7 @@ define('FM_IS_WIN', DIRECTORY_SEPARATOR == '\\');
 
 // always use ?p=
 if (!isset($_GET['p']) && empty($_FILES)) {
-    fm_redirect(FM_SELF_URL . '?p=');
+    fm_redirect(FM_SELF_URL . '?p=images/' . date('Y'));
 }
 
 // get path
