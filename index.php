@@ -63,8 +63,8 @@ if ($_GET['do'] == 'list') {
                 'name' => basename($i),
                 'path' => preg_replace('@^\./@', '', $directory . '/' . $entry),
                 'is_dir' => is_dir($i),
-                'is_deleteable' => $allow_delete && ((!is_dir($i) && is_writable($directory)) ||
-                        (is_dir($i) && is_writable($directory) && is_recursively_deleteable($i))),
+                'is_deleteable' => $allow_delete && ((!is_dir($i) && is_writable($basedir . $directory)) ||
+                        (is_dir($i) && is_writable($basedir . $directory) && is_recursively_deleteable($i))),
                 'is_readable' => is_readable($i),
                 'is_writable' => is_writable($i),
                 'is_executable' => is_executable($i),
@@ -73,7 +73,7 @@ if ($_GET['do'] == 'list') {
     } else {
         err(412, "Not a Directory");
     }
-    echo json_encode(['success' => true, 'is_writable' => is_writable($file), 'results' => $result]);
+    echo json_encode(['success' => true, 'is_writable' => is_writable($basedir . $file), 'results' => $result]);
     exit;
 } elseif ($_POST['do'] == 'delete') {
     if ($allow_delete) {
