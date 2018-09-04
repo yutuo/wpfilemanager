@@ -15,6 +15,7 @@ if (!(function_exists('current_user_can') && current_user_can('upload_files'))) 
 
 $upload_dir = wp_upload_dir();
 $basedir = $upload_dir['basedir'] . '/';
+$baseurl = $upload_dir['baseurl'] . '/';
 
 //Security options
 $allow_delete = true; // Set to false to disable delete button and delete POST request.
@@ -399,6 +400,7 @@ $MAX_UPLOAD_SIZE = min(asBytes(ini_get('post_max_size')), asBytes(ini_get('uploa
     </style>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script>
+        var baseurl = '<?php echo $baseurl; ?>';
         (function ($) {
             $.fn.tablesorter = function () {
                 var $table = this;
@@ -566,7 +568,7 @@ $MAX_UPLOAD_SIZE = min(asBytes(ini_get('post_max_size')), asBytes(ini_get('uploa
                 if (data.is_dir) {
                     $link = $('<a class="name" />').attr('href', '#' + encodeURI(data.path)).text(data.name);
                 } else {
-                    $link = $('<span class="name" />').text(data.name);
+                    $link = $('<a class="name" target="_blank" />').attr('href', baseurl + encodeURI(data.path)).text(data.name);
                 }
                 var allow_direct_link = <?php echo $allow_direct_link ? 'true' : 'false'; ?>;
                 if (!data.is_dir && !allow_direct_link) $link.css('pointer-events', 'none');
@@ -655,6 +657,7 @@ $MAX_UPLOAD_SIZE = min(asBytes(ini_get('post_max_size')), asBytes(ini_get('uploa
 
     </tbody>
 </table>
-<footer>WP File Manager by <a href="https://yutuo.net">Yutuo</a> (<a href="https://github.com/yutuo">GitHub</a>) .</footer>
+<footer>WP File Manager by <a href="https://yutuo.net">Yutuo</a> (<a href="https://github.com/yutuo">GitHub</a>) .
+</footer>
 </body>
 </html>
