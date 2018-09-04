@@ -10,7 +10,7 @@
 require_once(dirname(dirname(__FILE__)) . '/wp-config.php');
 if (!(function_exists('current_user_can') && current_user_can('upload_files'))) {
     header('HTTP/1.0 403 Forbidden');
-    die('You are not allowed to access this file.');
+    die('<html><head><title>403 Forbidden</title></head><body><h1>Forbidden</h1><p>You don\'t have permission to access this server.</p></body></html>');
 }
 
 $upload_dir = wp_upload_dir();
@@ -283,13 +283,13 @@ $MAX_UPLOAD_SIZE = min(asBytes(ini_get('post_max_size')), asBytes(ini_get('uploa
 
         footer {
             font-size: 11px;
-            color: #bbbbc5;
-            padding: 4em 0 0;
-            text-align: left;
+            color: #bbb;
+            padding: 5px;
+            text-align: right;
         }
 
         footer a, footer a:visited {
-            color: #bbbbc5;
+            color: #bbb;
         }
 
         #breadcrumb {
@@ -620,7 +620,6 @@ $MAX_UPLOAD_SIZE = min(asBytes(ini_get('post_max_size')), asBytes(ini_get('uploa
     <?php endif; ?>
 
     <?php if ($allow_upload): ?>
-
         <div id="file_drop_target">
             Drag Files Here To Upload
             <b>or</b>
@@ -645,6 +644,6 @@ $MAX_UPLOAD_SIZE = min(asBytes(ini_get('post_max_size')), asBytes(ini_get('uploa
 
     </tbody>
 </table>
-<footer>simple php filemanager by <a href="https://github.com/jcampbell1">jcampbell1</a></footer>
+<footer>WP File Manager by <a href="https://yutuo.net">Yutuo</a> (<a href="https://github.com/yutuo">GitHub</a>) .</footer>
 </body>
 </html>
