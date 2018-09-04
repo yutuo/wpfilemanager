@@ -11,7 +11,13 @@ Just copy `index.php` to the wordpress's sub folder(eg. `fm`) on your webserver.
 
 ## Screenshot
 
-![Screenshot](https://raw.github.com/jcampbell1/simple-file-manager/master/screenshot.png "Screenshot")
+** WordPress Logined **
+
+![WordPress Logined](https://raw.github.com/yutuo/wpfilemanager/master/wplogined.png "WordPress Logined")
+
+** WordPress Not Login **
+
+![WordPress Not Login](https://raw.github.com/yutuo/wpfilemanager/master/wpnotlogin.png "WordPress Not Login")
 
 ### License
 
