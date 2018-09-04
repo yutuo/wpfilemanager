@@ -116,7 +116,7 @@ if ($_GET['do'] == 'list') {
     header(sprintf('Content-Disposition: attachment; filename=%s',
         strpos('MSIE', $_SERVER['HTTP_REFERER']) ? rawurlencode($filename) : "\"$filename\""));
     ob_flush();
-    readfile($file);
+    readfile($basedir . $file);
     exit;
 }
 
