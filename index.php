@@ -24,7 +24,7 @@ $allow_direct_link = true; // Set to false to only allow downloads and not direc
 $allow_show_folders = true; // Set to false to hide all subdirectories
 
 $disallowed_extensions = ['php'];  // must be an array. Extensions disallowed to be uploaded
-$hidden_extensions = ['php']; // must be an array of lowercase file extensions. Extensions hidden in directory index
+$hidden_extensions = ['php', 'htaccess']; // must be an array of lowercase file extensions. Extensions hidden in directory index
 
 // must be in UTF-8 or `basename` doesn't work
 setlocale(LC_ALL, 'en_US.UTF-8');
@@ -46,6 +46,15 @@ if (!$_COOKIE['_sfm_xsrf'])
 if ($_POST) {
     if ($_COOKIE['_sfm_xsrf'] !== $_POST['xsrf'] || !$_POST['xsrf'])
         err(403, "XSRF Failure");
+}
+
+function cmp($a, $b)
+{
+    if ($a['is_dir'] !== $b['is_dir']) {
+        return $b['is_dir'] - $a['is_dir'];
+    } else {
+        return strcmp($a["name"], $b["name"]);
+    }
 }
 
 $file = $_REQUEST['file'] ?: '.';
@@ -70,6 +79,8 @@ if ($_GET['do'] == 'list') {
                 'is_executable' => is_executable($i),
             ];
         }
+
+        usort($result, 'cmp');
     } else {
         err(412, "Not a Directory");
     }
