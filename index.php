@@ -553,13 +553,13 @@ $MAX_UPLOAD_SIZE = min(asBytes(ini_get('post_max_size')), asBytes(ini_get('uploa
             function renderFileRow(data) {
                 var $link = '';
                 if (data.is_dir) {
-                    $link = $('<a class="name" />').attr('href', '#' + encodeURIComponent(data.path)).text(data.name);
+                    $link = $('<a class="name" />').attr('href', '#' + encodeURI(data.path)).text(data.name);
                 } else {
                     $link = $('<span class="name" />').text(data.name);
                 }
                 var allow_direct_link = <?php echo $allow_direct_link ? 'true' : 'false'; ?>;
                 if (!data.is_dir && !allow_direct_link) $link.css('pointer-events', 'none');
-                var $dl_link = $('<a/>').attr('href', '?do=download&file=' + encodeURIComponent(data.path))
+                var $dl_link = $('<a/>').attr('href', '?do=download&file=' + encodeURI(data.path))
                     .addClass('download').text('download');
                 var $delete_link = $('<a href="#" />').attr('data-file', data.path).addClass('delete').text('delete');
                 var perms = [];
